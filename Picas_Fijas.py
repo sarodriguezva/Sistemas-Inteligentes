@@ -27,8 +27,23 @@ class Agente:
             else:
                 lista.append(cifra)
 
-    def compute(self):
-        return 0
+    def compute(self, perception):
+        if type(perception) is not str:
+            print("Entrada no se puede procesar.")
+            return
+
+        picas = 0
+        fijas = 0
+        cifras = [digit for digit in self.miNumero]
+
+        for i in range(len(perception)):
+            if self.miNumero[i] == perception[i]:
+                fijas += 1
+                continue
+            if perception[i] in cifras:
+                picas += 1
+
+        return [picas, fijas]
 
 class Ambiente:
     miAgente = Agente()
