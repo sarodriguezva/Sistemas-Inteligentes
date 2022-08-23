@@ -3,7 +3,8 @@ import random
 class Agente:
     miNumero = ""
     guess = ""
-    rondas = []
+    rondas = {}
+    options = "0123456789"
 
     #Setea de forma aleatoria el número con el que jugará
     def setup(self):
@@ -24,6 +25,10 @@ class Agente:
                 break
             else:
                 lista.append(cifra)
+        
+        self.guess = ""
+        self.rondas = {}
+        self.options = "0123456789"
 
     def compute(self, perception):
         response = self.switch(perception)
@@ -39,6 +44,25 @@ class Agente:
         
         elif (perception == "#"):
             #Número del rival que debo adivinar
+            if len(self.rondas) == 0:
+                self.guess = "0123"
+                return self.guess
+            elif len(self.rondas) == 1:
+                self.guess = "4567"
+                return self.guess
+            elif (len(self.rondas) == 2):
+                t1 = self.rondas.get("0123")
+                t2 = self.rondas.get("4567")
+                t1s = t1[0] + t1[1]
+                t2s = t2[0] + t2[1]
+                suma = t1s + t2s
+                
+                if suma == 4:
+                    self.options = "01234567"
+                    
+                elif suma <= 4:
+                    return
+                
             return
         
         elif (len(perception) == 4 and perception[0] in numbers and perception[1] in numbers and perception[2] in numbers and perception[3] in numbers):
@@ -49,7 +73,7 @@ class Agente:
         elif (len(perception) == 3 and perception[0] in numbers and perception[1] == "," and perception[2] in numbers 
             and int(perception[0]) + int(perception[2]) >= 0 and int(perception[0]) + int(perception[2]) <= 4):
             #Guardar número de picas y fijas del rival
-            rondas.append([guess, int(perception[0]), int(perception[2])])
+            self.rondas.update({self.guess : (int(perception[0]), int(perception[2]))})  
             return "A"
         
         else:
