@@ -1,11 +1,10 @@
 import random
 
 class Agente:
-    miNumero = 0
-    picas = 0
-    fijas = 0
-
+    miNumero = ""
+    guess = ""
     rondas = []
+
     #Setea de forma aleatoria el número con el que jugará
     def setup(self):
         self.miNumero = str(random.randint(0,9999))
@@ -25,30 +24,40 @@ class Agente:
                 break
             else:
                 lista.append(cifra)
-        
-        self.picas = 0
-        self.fijas = 0
 
     def compute(self, perception):
         response = self.switch(perception)
         return response
     
-    def switch(perception):
+    def switch(self, perception):
         numbers = "0123456789"
         if (perception == "S"):
+            #Iniciar juego
             self.setup()
             print(self.miNumero)
             return "R"
+        
         elif (perception == "#"):
-            return 
+            #Número del rival que debo adivinar
+            return
+        
         elif (len(perception) == 4 and perception[0] in numbers and perception[1] in numbers and perception[2] in numbers and perception[3] in numbers):
-            self.numeroRecibido(perception)
-            return str(self.picas) + "," + str(self.fijas)
+            #Picas y fijas de mi número
+            (picas, fijas) = self.inputNumber(perception)
+            return str(picas) + "," + str(fijas)
+        
         elif (len(perception) == 3 and perception[0] in numbers and perception[1] == "," and perception[2] in numbers 
-            and perception[0] + perception[2] >= 0 and perception[0] + perception[2] <= 4):
+            and int(perception[0]) + int(perception[2]) >= 0 and int(perception[0]) + int(perception[2]) <= 4):
+            #Guardar número de picas y fijas del rival
+            rondas.append([guess, int(perception[0]), int(perception[2])])
             return "A"
+        
+        else:
+            return "Elemento recibido no puede ser procesado."
     
-    def numeroRecibido(n):
+    def inputNumber(self, n):
+        picas = 0
+        fijas = 0
         cifras = [digit for digit in self.miNumero]
 
         for i in range(len(perception)):
@@ -57,6 +66,8 @@ class Agente:
                 continue
             if perception[i] in cifras:
                 self.picas += 1
+        
+        return (picas, fijas)
 
 
 class Ambiente:
