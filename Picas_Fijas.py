@@ -96,7 +96,10 @@ class Agente:
 
 class Ambiente:
     miAgente = Agente()
-    miAgente2 = Agente()
+
+    while True:
+        entrada = input("Esperando entrada")
+        print(miAgente.compute(entrada))
 
 
 def main():
