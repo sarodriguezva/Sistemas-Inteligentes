@@ -1,6 +1,5 @@
 import random
 from itertools import permutations
-from itertools import zip
 
 class Agente:
     miNumero = ""
@@ -53,7 +52,7 @@ class Agente:
             #Número del rival que debo adivinar
             self.guess = self.opciones[0]
             self.respuestas.append(self.guess)
-            return self.guess
+            return "".join(self.guess)
 
         elif len(perception) == 4 and perception[0] in numbers and perception[1] in numbers and perception[2] in numbers and perception[3] in numbers:
             #Picas y fijas de mi número
@@ -91,14 +90,14 @@ class Agente:
                 fijas += 1
             elif g in chosen:
                 picas += 1
-        return fijas, picas
+        return picas, fijas
 
 
 class Ambiente:
     miAgente = Agente()
 
     while True:
-        entrada = input("Esperando entrada")
+        entrada = input("Esperando entrada ")
         print(miAgente.compute(entrada))
 
 
