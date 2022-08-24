@@ -1,3 +1,5 @@
+#Agente implementado por grupo "Los Óptimos"
+
 import random
 from itertools import permutations
 
