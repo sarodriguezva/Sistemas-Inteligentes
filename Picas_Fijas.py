@@ -47,7 +47,6 @@ class Agente:
         if perception == "S":
             #Iniciar juego
             self.setup()
-            print(self.miNumero)
             return "R"
 
         elif perception == "#":
