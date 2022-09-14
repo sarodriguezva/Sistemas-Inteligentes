@@ -1,0 +1,38 @@
+#Paquetes a instalar
+
+#verificar versión de python con python --version
+#o python3 --version
+#Ver qué comando (python/python3) contiene Python 3+
+
+#Los comandos siguientes se ejecutan con python o python3
+#dependiendo el caso.
+
+python -m pip install --upgrade pip
+python -m pip install --upgrade Pillow
+python -m pip install --upgrade numpy
+python -m pip install --upgrade keras
+python -m pip install --upgrade tensorflow
+
+Tiles 43.8x43.8
+Tamaño w:438 x h:657
+15 tiles altura
+10 tiles ancho
+img_array[row-range, column-range]
+
+#Región jugable
+img_array[int(43.8*3):int(43.8*14), int(43.8*2):int(43.8*9)]
+
+
+Promedios
+Muro: 70/101/115 - 156
+Diamante: 50 - 65
+Piso: 94/100 - 132
+
+Diamante: 57
+Salida: 69
+Player: 61
+Muro: 133
+Piso: 114
+
+79 - 121 piso verde
+92 - 149
